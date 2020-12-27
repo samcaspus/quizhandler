@@ -4,7 +4,7 @@ const port = 8000;
 
 app = express();
 
-app.use("/", require("./router/index"))
+app.use("/", require("./router"))
 
 
 
