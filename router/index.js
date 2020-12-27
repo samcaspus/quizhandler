@@ -1,11 +1,14 @@
 const express = require("express");
+const mongoose = require("../config/mongoose");
+const questionController = require("../controller/questionController");
 const router = express.Router();
 
 
-router.get("/progress")
-router.get("/question")
-router.post("/create-question")
-router.post("/delete-auestion")
+router.get("/", questionController.template)
+router.get("/get-progress", questionController.progress);
+router.get("/get-question", questionController.question);
+router.post("/create-question", questionController.createQuestion);
+router.post("/delete-auestion", questionController.deleteQuestion);
 
 
 

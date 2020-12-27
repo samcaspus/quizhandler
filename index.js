@@ -1,8 +1,13 @@
 const express = require(`express`);
+const ejs = require("ejs");
 const router = express.Router();
 const port = 8000;
-
 app = express();
+
+app.use(express.urlencoded());
+app.use(express.json());
+app.set("view engine", "ejs")
+
 
 app.use("/", require("./router"))
 
