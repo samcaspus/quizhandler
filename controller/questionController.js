@@ -1,3 +1,4 @@
+const Quiz = require("../model/questionSet")
 
 module.exports.progress = (req, res) => {
     return res.status(200).json({
@@ -8,6 +9,8 @@ module.exports.progress = (req, res) => {
 
 
 module.exports.question = (req, res) => {
+    const { progress } = req.query;
+    console.log(req.progress)
     return res.status(200).json({
         "question": "d"
     })
@@ -15,21 +18,36 @@ module.exports.question = (req, res) => {
 
 
 
-module.exports.createQuestion = (req, res) => {
-    return res.status(200).json({
-        "create": "d"
+module.exports.createQuestion = async (req, res) => {
+    const { option, url, answer } = req.body;
+    const length = await Quiz.find({});
+    await Quiz.create({
+        id: length.length,
+        quizType: option,
+        url,
+        answer
+    }, (err) => {
+        if (err) {
+            console.log(err);
+        }
     })
+
+    return res.redirect("/")
 }
 
 
 
-module.exports.deleteQuestion = (req, res) => {
-    return res.status(200).json({
-        "delete": "d"
+module.exports.deleteQuestion = async (req, res) => {
+    const { answer } = req.body;
+    await Quiz.deleteOne({
+        answer
     })
+
+    return res.redirect("/")
 }
 
 
-module.exports.template = (req, res) => {
-    return res.render("index");
+module.exports.template = async (req, res) => {
+    const response = await Quiz.find({}).sort("asce");
+    return res.render("index", { response: response });
 }

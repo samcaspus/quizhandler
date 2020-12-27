@@ -8,7 +8,7 @@ router.get("/", questionController.template)
 router.get("/get-progress", questionController.progress);
 router.get("/get-question", questionController.question);
 router.post("/create-question", questionController.createQuestion);
-router.post("/delete-auestion", questionController.deleteQuestion);
+router.post("/delete-question", questionController.deleteQuestion);
 
 
 
