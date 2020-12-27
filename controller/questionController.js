@@ -8,11 +8,12 @@ module.exports.progress = (req, res) => {
 
 
 
-module.exports.question = (req, res) => {
+module.exports.question = async (req, res) => {
     const { progress } = req.query;
-    console.log(req.progress)
+
+    const question = await Quiz.findOne({ id: progress });
     return res.status(200).json({
-        "question": "d"
+        "data": question
     })
 }
 
